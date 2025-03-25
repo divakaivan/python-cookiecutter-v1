@@ -5,7 +5,10 @@ from uuid import uuid4
 
 import pytest
 
-from tests.utils.project import generate_project, init_git_repo
+from tests.utils.project import (
+    generate_project,
+    init_git_repo,
+)
 
 
 @pytest.fixture(scope="session")
