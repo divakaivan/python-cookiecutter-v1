@@ -1,9 +1,9 @@
-# python-course-package
+# python-cookiecutter-v1
 
 ## Quick start
 
 ```bash
-pip install python-course-package
+pip install python-cookiecutter-v1
 ```
 
 ```python
@@ -14,7 +14,7 @@ from example_pkg import ...
 
 ```bash
 # clone the repo
-git clone https://github.com/phitoduck/python-course-package.git
+git clone https://github.com/divakaivan/python-cookiecutter-v1.git
 
 # install the dev dependencies
 make install
