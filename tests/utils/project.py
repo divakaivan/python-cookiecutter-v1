@@ -2,6 +2,7 @@ import json
 import subprocess
 from copy import deepcopy
 from pathlib import Path
+from typing import Dict
 
 from tests.consts import PROJECT_DIR
 
@@ -13,7 +14,7 @@ def init_git_repo(repo_dir: Path):
     subprocess.run(["git", "commit", "-m", "Initial commit by pytest"], cwd=repo_dir, check=True)
 
 
-def generate_project(template_values: dict[str, str], test_session_id: str):
+def generate_project(template_values: Dict[str, str], test_session_id: str):
     template_values = deepcopy(template_values)
     cookiecutter_config = {"default_context": template_values}
     cookiecutter_config_fpath = PROJECT_DIR / f"cookiecutter-{test_session_id}.json"
