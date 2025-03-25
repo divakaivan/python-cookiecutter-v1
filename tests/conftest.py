@@ -1,8 +1,4 @@
-"""
-Register pytest plugins, fixtures, and hooks to be used during test execution.
-
-Docs: https://stackoverflow.com/questions/34466027/in-pytest-what-is-the-use-of-conftest-py-files
-"""
+"""Pytest configuration file; is executed before test collection."""
 
 import sys
 from pathlib import Path

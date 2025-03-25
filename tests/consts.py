@@ -1,4 +1,4 @@
-"""Constant values used for tests."""
+"""Constant values, used for tests and fixtures."""
 
 from pathlib import Path
 
