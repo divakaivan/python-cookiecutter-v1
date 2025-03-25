@@ -1,20 +1,28 @@
 import json
+import shutil
 import subprocess
+from copy import deepcopy
 from pathlib import Path
+
+import pytest
 
 THIS_DIR = Path(__file__).parent
 PROJECT_DIR = (THIS_DIR / "../").resolve()
 
 
-def test__can_generate_project():
-    """
-    execute: `cookiecutter <template_dir> ...`
-    """
-    cookiecutter_config = {
-        "default_context": {
-            "repo_name": "test-repo",
-        }
+@pytest.fixture(scope="function")
+def project_dir() -> Path:
+    template_values = {
+        "repo_name": "test-repo",
     }
+    generated_repo_dir: Path = generate_project(template_values=template_values)
+    yield generated_repo_dir
+    shutil.rmtree(generated_repo_dir)
+
+
+def generate_project(template_values: dict[str, str]):
+    template_values = deepcopy(template_values)
+    cookiecutter_config = {"default_context": template_values}
     cookiecutter_config_fpath = PROJECT_DIR / "cookiecutter-test-config.json"
     cookiecutter_config_fpath.write_text(json.dumps(cookiecutter_config))
     subprocess.run(
@@ -29,6 +37,13 @@ def test__can_generate_project():
         ],
         check=True,
     )
+    generated_repo_dir = PROJECT_DIR / "sample" / template_values["repo_name"]
+    return generated_repo_dir
 
-    generated_project_dir = PROJECT_DIR / "sample" / cookiecutter_config["default_context"]["repo_name"]
-    assert generated_project_dir.exists()
+
+def test__can_generate_project(project_dir: Path):
+    """
+    execute: `cookiecutter <template_dir> ...`
+    """
+
+    assert project_dir.exists()
