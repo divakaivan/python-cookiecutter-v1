@@ -1,20 +1,20 @@
-# python-cookiecutter-v1
+# {{cookiecutter.repo_name}}
 
 ## Quick start
 
 ```bash
-pip install python-cookiecutter-v1
+pip install {{cookiecutter.repo_name}}
 ```
 
 ```python
-from example_pkg import ...
+from {{cookiecutter.package_import_name}} import ...
 ```
 
 ## Contributing
 
 ```bash
 # clone the repo
-git clone https://github.com/divakaivan/python-cookiecutter-v1.git
+git clone https://github.com/divakaivan/{{cookiecutter.repo_name}}.git
 
 # install the dev dependencies
 make install
