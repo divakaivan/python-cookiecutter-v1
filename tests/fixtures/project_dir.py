@@ -13,12 +13,13 @@ def project_dir() -> Path:
         "repo_name": "test-repo",
     }
     generated_repo_dir: Path = generate_project(template_values=template_values)
-    init_git_repo(repo_dir=generated_repo_dir)
-    subprocess.run(
-        ["make", "lint-ci"],
-        cwd=generated_repo_dir,
-        check=False,
-    )
-
-    yield generated_repo_dir
-    shutil.rmtree(generated_repo_dir)
+    try:
+        init_git_repo(repo_dir=generated_repo_dir)
+        subprocess.run(
+            ["make", "lint-ci"],
+            cwd=generated_repo_dir,
+            check=False,
+        )
+        yield generated_repo_dir
+    finally:
+        shutil.rmtree(generated_repo_dir)
